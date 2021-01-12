@@ -68,10 +68,22 @@ export default {
       rrp: Number,
       cleaningOrRepairCost: Number,
       rentalPeriodInDays: Number,
-      calculatedRrpPerDay: (this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays),
-      calculatedBookingEarning: this.calculatedRrpPerDay * this.rentalPeriodInDays,
-      calculatedNumberOfBookingsToEarnRrp: this.rrp / this.calculatedBookingEarning
+      // calculatedRrpPerDay: (this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays),
+      // calculatedBookingEarning: this.calculatedRrpPerDay * this.rentalPeriodInDays,
+      // calculatedNumberOfBookingsToEarnRrp: this.rrp / this.calculatedBookingEarning
     };
+  },
+  computed: {
+    calculatedRrpPerDay() {
+      console.log(this)
+      return (this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays)
+    },
+    calculatedBookingEarning() {
+      return this.calculatedRrpPerDay * this.rentalPeriodInDays
+    },
+    calculatedNumberOfBookingsToEarnRrp() {
+      return this.rrp / this.calculatedBookingEarning
+    }
   }
 }
 </script>
