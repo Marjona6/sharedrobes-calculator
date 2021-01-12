@@ -49,6 +49,7 @@
 </template>
 
 <script>
+// TODO: set minimum calculatedRrpPerDay to 1 euro 50
 const rrpPercentage = {
   7: 0.02,
   14: 0.0175,
