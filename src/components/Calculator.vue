@@ -3,22 +3,22 @@
     <h1>{{ msg }}</h1>
     <div class="input">
       <h3>Are you calculating for a clothing item or an accessory? *</h3>
-      <select name="item-type" id="item-type-select">
+      <select name="item-type" id="item-type-select" v-model="itemType">
         <option value="clothing">Clothing Item</option>
         <option value="accessory">Accessory</option>
       </select>
     </div>
     <div class="input">
       <h3>Recommended Retail Price (RRP) *</h3>
-      <input type="number" id="item-rrp-select" min="0" max="50" step="1" v-model="rrp"/>
+      <input type="number" id="item-rrp-select" v-model="rrp"/>
       <!--TODO: add euro symbol to left-hand side-->
       <p>How much does your item cost if bought new?</p>
     </div>
     <div class="input">
-      <h3>Cleaning Cost</h3>
-      <input type="range" id="item-cleaning-cost-select" v-model="cleaningOrRepairCost" />
-      <!--TODO: change h3 text with item-type-select change-->
-      <p>How much will it cost to clean the item after each booking?</p>
+      <h3>{{cleaningOrRepairLabel}}</h3>
+      <h3>€{{cleaningOrRepairCost}}</h3>
+      <input type="range" id="item-cleaning-cost-select"  min="0" max="50" step="1" v-model="cleaningOrRepairCost" />
+      <p>How much will it cost to {{cleaningOrRepairVerb}} the item after each booking?</p>
     </div>
     <div class="input">
       <h3>Minimum Rental Period *</h3>
@@ -58,31 +58,31 @@ const rrpPercentage = {
 export default {
   name: 'Calculator',
   props: {
-    msg: String,
-    // rrp: Number,
-    // cleaningOrRepairCost: Number
-    // calculatedRrpPerDay: Number
+    msg: String
   },
   data() {
     return {
-      rrp: Number,
-      cleaningOrRepairCost: Number,
-      rentalPeriodInDays: Number,
-      // calculatedRrpPerDay: (this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays),
-      // calculatedBookingEarning: this.calculatedRrpPerDay * this.rentalPeriodInDays,
-      // calculatedNumberOfBookingsToEarnRrp: this.rrp / this.calculatedBookingEarning
+      itemType: 'clothing',
+      rrp: 50,
+      cleaningOrRepairCost: 4,
+      rentalPeriodInDays: 7
     };
   },
   computed: {
+    cleaningOrRepairLabel() {
+      return this.itemType === 'accessory' ? 'Repair Cost' : 'Cleaning Cost'
+    },
+    cleaningOrRepairVerb() {
+      return this.itemType === 'accessory' ? 'repair' : 'clean'
+    },
     calculatedRrpPerDay() {
-      console.log(this)
-      return (this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays)
+      return ((this.rrp * rrpPercentage[this.rentalPeriodInDays]) + (this.cleaningOrRepairCost/this.rentalPeriodInDays)).toFixed(2)
     },
     calculatedBookingEarning() {
-      return this.calculatedRrpPerDay * this.rentalPeriodInDays
+      return (this.calculatedRrpPerDay * this.rentalPeriodInDays).toFixed(2)
     },
     calculatedNumberOfBookingsToEarnRrp() {
-      return this.rrp / this.calculatedBookingEarning
+      return (this.rrp / this.calculatedBookingEarning).toFixed(2)
     }
   }
 }
