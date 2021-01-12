@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "deploy": "node scripts/gh-pages-deploy.js",
     "dev": "NODE_ENV=development vue-cli-service serve --open --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
