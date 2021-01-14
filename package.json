@@ -7,7 +7,7 @@
     "deploy": "node scripts/gh-pages-deploy.js",
     "dev": "NODE_ENV=development vue-cli-service serve --open --host localhost",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|vue)\"",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint --ignore-path .gitignore .",
     "serve": "vue-cli-service serve",
     "test": "jest"
   },
