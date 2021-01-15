@@ -6,7 +6,8 @@
       "jsx": "preserve",
       "moduleResolution": "node",
       "noEmit": true,
-      "baseUrl": "./src"
+      "baseUrl": "./src",
+      "skipLibCheck": true
     },
     "exclude": [
       "node_modules"
