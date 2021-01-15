@@ -50,15 +50,16 @@
   </ul>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import Calculator from './components/Calculator.vue'
 
-export default {
-  name: 'App',
+export default Vue.extend({
+  name: 'App' as string,
   components: {
     Calculator,
   },
-}
+})
 </script>
 
 <style>
